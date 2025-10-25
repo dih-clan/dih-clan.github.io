@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DIH Clan | Dominate In Hell</title>
+  <title>DIH Clan | Dominate in Rust</title>
   <style>
     :root{
       --bg:#070707;
@@ -208,24 +208,25 @@
     }
     .lead{font-size:18px; color:var(--muted); line-height:1.7}
 
-    /* Stats row */
-    .stats{
-      display:flex;
+    /* Image placeholders */
+    .placeholders{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
       gap:14px;
-      flex-wrap:wrap;
-      justify-content:center;
       margin-top:18px;
     }
-    .stat{
-      min-width:140px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:16px;
+    .ph {
+      height:140px;
       border-radius:10px;
-      text-align:center;
-      border:1px solid rgba(255,255,255,0.03);
+      background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px dashed rgba(255,255,255,0.03);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
     }
-    .stat .num{font-size:22px; font-weight:800; color:#fff}
-    .stat .label{font-size:12px; color:var(--muted); margin-top:6px}
 
     /* Footer */
     footer{
@@ -238,12 +239,17 @@
     /* Small screens */
     @media (max-width:820px){
       .grid{grid-template-columns:1fr}
+      .placeholders{grid-template-columns:repeat(2,1fr)}
       header{padding:12px}
       .hero-inner{padding:28px}
       .logo{width:40px;height:40px}
     }
 
-    /* Subtle ambient particles */
+    @media (max-width:480px){
+      .placeholders{grid-template-columns:1fr}
+    }
+
+    /* particles */
     .particle{
       position:absolute;
       width:14px;
@@ -260,7 +266,6 @@
       to{transform:translateY(-140px) translateX(40px) scale(.6); opacity:0}
     }
 
-    /* tiny typed cursor for subtitle */
     .typed{border-right:2px solid rgba(255,255,255,0.08); padding-right:6px}
   </style>
 </head>
@@ -282,7 +287,7 @@
       <div class="kicker">RUST // CLAN</div>
       <h2 class="title">
         <span>Dominate</span>
-        <span class="accent-word">In Hell</span>
+        <span class="accent-word">in Rust</span>
       </h2>
       <p class="subtitle">
         <span id="typed" class="typed">Precision raids, iron bases, tactical play.</span>
@@ -294,7 +299,6 @@
       </div>
     </div>
 
-    <!-- ambient particles -->
     <div id="particles"></div>
   </div>
 
@@ -303,42 +307,27 @@
       <div class="grid">
         <div>
           <h3 style="color:var(--accent); margin-top:0">About DIH</h3>
-          <p class="lead">DIH is a tight-knit Rust clan focused on coordinated raids, resilient bases, and disciplined teamwork. We value communication, situational awareness, and execution above all.</p>
-          <div class="stats" aria-hidden="true">
-            <div class="stat"><div class="num" data-target="42">0</div><div class="label">Successful Raids</div></div>
-            <div class="stat"><div class="num" data-target="12">0</div><div class="label">Active Operators</div></div>
-            <div class="stat"><div class="num" data-target="98">0</div><div class="label">Hours Logged (weekly)</div></div>
-          </div>
+          <p class="lead">DIH is a focused Rust clan that values strategy, teamwork, and clean execution. We emphasize clear comms, role discipline, and building bases that stand the test of raids. Newcomers and veterans are both welcome as long as they bring discipline and firepower.</p>
         </div>
 
         <div>
-          <h3 style="margin-top:0">What we do</h3>
-          <ul style="color:var(--muted); line-height:1.8; padding-left:18px; margin-top:8px">
-            <li>Planned multi-stage raids and scorched-earth retreats</li>
-            <li>Efficient base layouts and trap funnels</li>
-            <li>Role-based squads: Raiders, Builders, Snipers, Scouts</li>
-          </ul>
+          <h3 style="margin-top:0">Gallery Placeholders</h3>
+          <div class="placeholders" aria-hidden="true">
+            <div class="ph">Image 1</div>
+            <div class="ph">Image 2</div>
+            <div class="ph">Image 3</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="show" class="panel" aria-labelledby="show-title">
-      <h3 id="show-title" style="color:var(--accent); margin-top:0">War Stories</h3>
-      <p class="lead">Short highlights from recent operations with concise, readable recaps for newcomers and vets alike.</p>
+    <section id="ops" class="panel" aria-labelledby="ops-title">
+      <h3 id="ops-title" style="color:var(--accent); margin-top:0">Quick Info</h3>
+      <p class="lead">Simple, clean, and focused. Use the Discord link to join. Replace the placeholder images by uploading to your server and swapping the .ph elements with <code>&lt;img&gt;</code> tags.</p>
 
-      <div style="display:grid;gap:12px;margin-top:16px">
-        <div style="display:flex;gap:12px;align-items:center">
-          <div style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></div>
-          <div style="color:var(--muted)">Oct 28 — Coordinated Oil Rig extraction, 6-man streak, 3 choppers down</div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:center">
-          <div style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></div>
-          <div style="color:var(--muted)">Nov 02 — Base defense drill, automated turret grid held off 4 sieges</div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:center">
-          <div style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></div>
-          <div style="color:var(--muted)">Nov 10 — Sniper exchange at Dome, field extraction executed under fire</div>
-        </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;justify-content:center">
+        <a class="btn" href="https://discord.gg/yourclanlink" target="_blank" rel="noopener noreferrer">Join Discord</a>
+        <button class="btn ghost" id="copyLink">Copy Discord Link</button>
       </div>
     </section>
   </main>
@@ -359,14 +348,14 @@
         'Silent approach. Brutal finish.',
         'We coordinate. We win.'
       ];
-      let p = 0, i = 0, deleting = false, charIndex = 0;
+      let p = 0, deleting = false, charIndex = 0;
       function tick(){
         const full = phrases[p];
         if(!deleting){
           el.textContent = full.slice(0, ++charIndex);
           if(charIndex === full.length){
             deleting = true;
-            setTimeout(tick, 1300);
+            setTimeout(tick, 1100);
             return;
           }
         } else {
@@ -383,56 +372,50 @@
 
     // scroll reveal via IntersectionObserver
     (function reveal(){
-      const sections = document.querySelectorAll('main section, .hero-inner');
+      const targets = document.querySelectorAll('main section, .hero-inner');
       const obs = new IntersectionObserver((entries)=>{
         entries.forEach(e=>{
           if(e.isIntersecting) e.target.classList.add('visible');
         });
       },{threshold:0.12});
-      sections.forEach(s=>obs.observe(s));
-    })();
-
-    // stat counter
-    (function counters(){
-      const nums = document.querySelectorAll('.stat .num');
-      const obs = new IntersectionObserver((entries, o)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            const el = entry.target;
-            const target = +el.getAttribute('data-target');
-            const duration = 1100;
-            const start = performance.now();
-            requestAnimationFrame(function run(now){
-              const t = Math.min(1, (now - start)/duration);
-              el.textContent = Math.floor(t * target);
-              if(t < 1) requestAnimationFrame(run);
-            });
-            o.unobserve(el);
-          }
-        });
-      }, {threshold:0.6});
-      nums.forEach(n=>obs.observe(n));
+      targets.forEach(s=>obs.observe(s));
     })();
 
     // particles (ambient)
     (function particles(){
       const container = document.getElementById('particles');
-      const count = 14;
+      const count = 12;
       for(let i=0;i<count;i++){
         const d = document.createElement('div');
         d.className='particle';
-        const size = 8 + Math.random()*28;
+        const size = 8 + Math.random()*32;
         d.style.width = d.style.height = size+'px';
-        d.style.left = (10 + Math.random()*80)+'%';
-        d.style.top = (50 + Math.random()*40)+'%';
+        d.style.left = (5 + Math.random()*90)+'%';
+        d.style.top = (40 + Math.random()*50)+'%';
         d.style.background = `radial-gradient(circle at 35% 30%, rgba(255,74,0,${0.06+Math.random()*0.06}), rgba(88,101,242,${0.02+Math.random()*0.04}))`;
-        d.style.animationDuration = (8 + Math.random()*10)+'s';
-        d.style.opacity = 0.6 - Math.random()*0.35;
+        d.style.animationDuration = (6 + Math.random()*12)+'s';
+        d.style.opacity = 0.5 - Math.random()*0.35;
         container.appendChild(d);
       }
     })();
 
-    // keyboard accessible skip to content for users who tab
+    // copy discord link button
+    (function copyLink(){
+      const btn = document.getElementById('copyLink');
+      const url = 'https://discord.gg/yourclanlink';
+      btn.addEventListener('click', async ()=>{
+        try{
+          await navigator.clipboard.writeText(url);
+          btn.textContent = 'Copied!';
+          setTimeout(()=>btn.textContent='Copy Discord Link',1200);
+        }catch{
+          btn.textContent = 'Copy Failed';
+          setTimeout(()=>btn.textContent='Copy Discord Link',1200);
+        }
+      });
+    })();
+
+    // keyboard accessible brand
     (function skipAnchor(){
       const brand = document.querySelector('.brand');
       brand.addEventListener('keydown', e=>{
