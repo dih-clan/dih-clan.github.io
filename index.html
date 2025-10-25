@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+// index.php - single-file DIH site
+?><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -84,39 +86,43 @@
     .panel{background:linear-gradient(180deg,var(--glass-2),transparent);padding:26px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 14px 40px rgba(0,0,0,0.55)}
     .lead{color:var(--muted);line-height:1.7;font-size:16px}
 
-    /* Large image sections with side text */
-    .feature{
+    /* Gallery: left half removed */
+    .gallery{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr; /* single column, images full width */
       gap:28px;
       align-items:center;
-      margin-top:12px;
     }
 
-    .feature.reverse{grid-template-columns:1fr 1fr; direction:rtl}
-    .feature.reverse .feature-img, .feature.reverse .feature-text{direction:ltr}
-
-    .feature-img{
-      height:360px;
+    .gallery-item{
+      display:block;
       border-radius:12px;
-      background-size:cover;
-      background-position:center;
-      box-shadow:0 18px 50px rgba(0,0,0,0.6);
+      overflow:hidden;
+      background:#111;
       border:1px solid rgba(255,255,255,0.03);
+      box-shadow:0 18px 50px rgba(0,0,0,0.6);
     }
 
-    .feature-text{
+    .gallery-img{
+      width:100%;
+      height:420px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .gallery-caption{
       padding:18px;
+      background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15));
+      color:var(--muted);
+      font-weight:600;
     }
-    .feature-text h4{margin:0 0 8px;color:var(--accent)}
-    .feature-text p{color:var(--muted);line-height:1.7}
 
-    /* Responsive */
-    @media (max-width:1000px){
-      .feature{grid-template-columns:1fr; gap:18px}
-      .hero{padding:110px 16px 36px}
+    @media (max-width:900px){
+      .gallery-img{height:240px}
       section{padding:60px 16px}
+      .hero{padding:110px 16px 36px}
     }
+
     footer{padding:36px 18px;text-align:center;color:var(--muted);font-size:13px}
 
     /* particles */
@@ -157,33 +163,20 @@
 
   <main>
     <section id="gallery" class="panel">
-      <!-- About text removed as requested. Gallery items now flow straight to the Discord section below. -->
-      <div>
-        <!-- Feature 1 -->
-        <div class="feature" style="margin-top:6px">
-          <div class="feature-img" style="background-image:url('https://via.placeholder.com/1200x800?text=Raid+Screenshot+1');"></div>
-          <div class="feature-text">
-            <h4>Oil Rig Assault</h4>
-            <p>Coordinated multi-squad breach and extraction. Fast, precise, lethal.</p>
-          </div>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img class="gallery-img" src="https://via.placeholder.com/1600x900?text=Raid+Screenshot+1" alt="Raid Screenshot 1">
+          <div class="gallery-caption">Oil Rig Assault — Coordinated multi-squad breach and extraction.</div>
         </div>
 
-        <!-- Feature 2 -->
-        <div class="feature reverse" style="margin-top:22px">
-          <div class="feature-img" style="background-image:url('https://via.placeholder.com/1200x800?text=Base+Build+1');"></div>
-          <div class="feature-text">
-            <h4>Fortified Base</h4>
-            <p>Layered defenses and trap funnels designed to stall and punish attackers.</p>
-          </div>
+        <div class="gallery-item">
+          <img class="gallery-img" src="https://via.placeholder.com/1600x900?text=Base+Build+1" alt="Base Build">
+          <div class="gallery-caption">Fortified Base — Layered defenses and trap funnels.</div>
         </div>
 
-        <!-- Feature 3 -->
-        <div class="feature" style="margin-top:22px">
-          <div class="feature-img" style="background-image:url('https://via.placeholder.com/1200x800?text=Sniper+Shot');"></div>
-          <div class="feature-text">
-            <h4>Field Extraction</h4>
-            <p>High-risk extractions executed under fire. Timing and coordination win fights.</p>
-          </div>
+        <div class="gallery-item">
+          <img class="gallery-img" src="https://via.placeholder.com/1600x900?text=Sniper+Shot" alt="Sniper Shot">
+          <div class="gallery-caption">Field Extraction — High-risk extractions executed under fire.</div>
         </div>
       </div>
     </section>
@@ -204,7 +197,7 @@
     // year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // reveal sections (keeps smooth reveal, not the typed JS)
+    // reveal sections
     (function reveal(){
       const targets = document.querySelectorAll('main section, .hero-inner');
       const obs = new IntersectionObserver((entries)=>{
@@ -239,3 +232,4 @@
   </script>
 </body>
 </html>
+```
