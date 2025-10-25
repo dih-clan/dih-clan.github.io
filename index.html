@@ -117,6 +117,48 @@
       font-weight:600;
     }
 
+    /* Video wrapper + loader */
+    .video-wrapper { position:relative; }
+    .video-loading {
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:48px; height:48px;
+      border:4px solid rgba(255,255,255,0.18);
+      border-top:4px solid var(--accent);
+      border-radius:50%;
+      animation:spin 0.8s linear infinite;
+      z-index:3;
+      pointer-events:none;
+      background:transparent;
+    }
+    .video-poster-overlay {
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:opacity .28s ease;
+    }
+    .video-poster-overlay.hidden { opacity:0; pointer-events:none; }
+    .video-play-button {
+      width:64px; height:64px; border-radius:999px;
+      background:linear-gradient(180deg, rgba(255,74,0,0.95), rgba(255,74,0,0.75));
+      display:grid; place-items:center; cursor:pointer;
+      box-shadow:0 8px 30px rgba(255,74,0,0.12);
+    }
+    .video-play-button:after {
+      content:"";
+      display:block;
+      margin-left:6px;
+      width:0;height:0;border-left:14px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;
+    }
+
+    @keyframes spin{ to { transform: translate(-50%,-50%) rotate(360deg); } }
+
     @media (max-width:900px){
       .gallery-img{height:240px}
       section{padding:60px 16px}
@@ -169,10 +211,26 @@
           <div class="gallery-caption">BASE - LAYERD DEFENCES</div>
         </div>
 
-    <section id="gallery" class="panel">
-      <div class="gallery">
-        <div class="gallery-item">
-          <img class="gallery-img" src="assets/2.png" alt="OPENCORE">
+        <!-- Video item: uses assets/2.png as poster and assets/basebuild.mp4 as source -->
+        <div class="gallery-item video-wrapper" aria-label="Video - Base build">
+          <div class="video-loading" id="videoLoader"></div>
+
+          <div id="posterOverlay" class="video-poster-overlay" style="background-image:url('assets/2.png')">
+            <div id="playBtn" class="video-play-button" aria-label="Play video" role="button" tabindex="0"></div>
+          </div>
+
+          <video
+            id="baseVideo"
+            class="gallery-img"
+            controls
+            playsinline
+            preload="metadata"
+            poster="assets/2.png"
+            aria-label="Base build video">
+            <source src="assets/basebuild.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
           <div class="gallery-caption">BASE - OPENCORES BUILT TO LAST</div>
         </div>
 
@@ -229,6 +287,64 @@
       btn.addEventListener('click', async ()=>{
         try{ await navigator.clipboard.writeText(url); btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy Discord Link',1200); }
         catch{ btn.textContent='Copy Failed'; setTimeout(()=>btn.textContent='Copy Discord Link',1200); }
+      });
+    })();
+
+    // video loader + controls overlay behaviour
+    (function videoController(){
+      const video = document.getElementById('baseVideo');
+      const loader = document.getElementById('videoLoader');
+      const posterOverlay = document.getElementById('posterOverlay');
+      const playBtn = document.getElementById('playBtn');
+
+      if(!video) return;
+
+      // show loader initially until canplay
+      loader.style.display = 'block';
+
+      // remove loader when video can play
+      video.addEventListener('canplay', () => {
+        loader.style.display = 'none';
+      });
+
+      // show loader while buffering
+      video.addEventListener('waiting', () => {
+        loader.style.display = 'block';
+      });
+      video.addEventListener('playing', () => {
+        loader.style.display = 'none';
+      });
+
+      // hide poster overlay when user plays (or if autoplay starts muted)
+      function hidePoster() {
+        if(posterOverlay) posterOverlay.classList.add('hidden');
+      }
+
+      // play overlay click
+      playBtn && playBtn.addEventListener('click', () => {
+        // attempt to play and hide poster
+        video.play().catch(()=>{ /* autoplay blocked */ });
+        hidePoster();
+      });
+
+      // allow keyboard activation on poster button
+      playBtn && playBtn.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playBtn.click(); }
+      });
+
+      // clicking the poster overlay also triggers play
+      posterOverlay && posterOverlay.addEventListener('click', () => {
+        video.play().catch(()=>{});
+        hidePoster();
+      });
+
+      // hide poster if user uses native controls to play
+      video.addEventListener('play', hidePoster);
+
+      // on error, hide loader and reveal poster
+      video.addEventListener('error', () => {
+        loader.style.display = 'none';
+        if(posterOverlay) posterOverlay.classList.remove('hidden');
       });
     })();
   </script>
