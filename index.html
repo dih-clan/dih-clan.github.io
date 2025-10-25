@@ -56,14 +56,14 @@
 
     /* Hero */
     .hero{
-      min-height:100vh;
+      min-height:62vh;
       display:grid;place-items:center;
-      padding:120px 18px 64px;text-align:center;position:relative;overflow:hidden;
+      padding:120px 18px 48px;text-align:center;position:relative;overflow:hidden;
     }
     .hero-inner{
       max-width:980px;width:100%;
       background:linear-gradient(180deg,var(--glass),transparent);
-      border-radius:14px;padding:44px;border:1px solid rgba(255,255,255,0.03);
+      border-radius:14px;padding:36px;border:1px solid rgba(255,255,255,0.03);
       box-shadow:0 18px 50px rgba(0,0,0,0.6);
       animation:lift .8s cubic-bezier(.2,.9,.3,1) both;
     }
@@ -79,18 +79,45 @@
 
     /* Main sections */
     main{position:relative;z-index:1}
-    section{padding:88px 18px;max-width:1100px;margin:0 auto;opacity:0;transform:translateY(20px);transition:all .7s;border-radius:12px}
+    section{padding:88px 18px;max-width:1200px;margin:0 auto;opacity:0;transform:translateY(20px);transition:all .7s;border-radius:12px}
     section.visible{opacity:1;transform:translateY(0)}
     .panel{background:linear-gradient(180deg,var(--glass-2),transparent);padding:26px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 14px 40px rgba(0,0,0,0.55)}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
     .lead{color:var(--muted);line-height:1.7;font-size:16px}
 
-    /* Gallery placeholders */
-    .placeholders{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-    .ph{height:150px;border-radius:10px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}.placeholders{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:480px){.placeholders{grid-template-columns:1fr}}
+    /* Large image sections with side text */
+    .feature{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:28px;
+      align-items:center;
+      margin-top:12px;
+    }
 
+    .feature.reverse{grid-template-columns:1fr 1fr; direction:rtl}
+    .feature.reverse .feature-img, .feature.reverse .feature-text{direction:ltr}
+
+    .feature-img{
+      height:360px;
+      border-radius:12px;
+      background-size:cover;
+      background-position:center;
+      box-shadow:0 18px 50px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .feature-text{
+      padding:18px;
+    }
+    .feature-text h4{margin:0 0 8px;color:var(--accent)}
+    .feature-text p{color:var(--muted);line-height:1.7}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .feature{grid-template-columns:1fr; gap:18px}
+      .hero{padding:110px 16px 36px}
+      section{padding:60px 16px}
+    }
     footer{padding:36px 18px;text-align:center;color:var(--muted);font-size:13px}
 
     /* particles */
@@ -108,7 +135,7 @@
 
     <nav>
       <a href="#home">Home</a>
-      <a class="cta" href="https://discord.gg/yourclanlink" target="_blank" rel="noopener noreferrer">Discord</a>
+      <a class="cta" href="https://discord.gg/xdwkgaNGba" target="_blank" rel="noopener noreferrer">Discord</a>
     </nav>
   </header>
 
@@ -125,7 +152,7 @@
 
       <div class="hero-cta">
         <a class="btn" href="#about">About DIH</a>
-        <a class="btn ghost" href="https://discord.gg/yourclanlink" target="_blank" rel="noopener noreferrer">Join Discord</a>
+        <a class="btn ghost" href="https://discord.gg/xdwkgaNGba" target="_blank" rel="noopener noreferrer">Join Discord</a>
       </div>
     </div>
 
@@ -141,11 +168,30 @@
         </div>
 
         <div>
-          <h3 style="margin-top:0">Gallery Placeholders</h3>
-          <div class="placeholders" aria-hidden="true">
-            <div class="ph">Image 1</div>
-            <div class="ph">Image 2</div>
-            <div class="ph">Image 3</div>
+          <h3 style="margin-top:0">Gallery</h3>
+
+          <div class="feature" style="margin-top:18px">
+            <div class="feature-img" style="background-image:url('https://via.placeholder.com/900x600?text=Raid+Screenshot+1');"></div>
+            <div class="feature-text">
+              <h4>Oil Rig Assault</h4>
+              <p>Coordinated multi-squad operation; timed breaches and extraction. Clean execution, fast loot rotation.</p>
+            </div>
+          </div>
+
+          <div class="feature reverse" style="margin-top:22px">
+            <div class="feature-img" style="background-image:url('https://via.placeholder.com/900x600?text=Base+Build+1');"></div>
+            <div class="feature-text">
+              <h4>Fortified Base</h4>
+              <p>Layered defenses and efficient funnels. Designed to stall and punish raiders while our teams mobilize countermeasures.</p>
+            </div>
+          </div>
+
+          <div class="feature" style="margin-top:22px">
+            <div class="feature-img" style="background-image:url('https://via.placeholder.com/900x600?text=Sniper+Shot');"></div>
+            <div class="feature-text">
+              <h4>Field Extraction</h4>
+              <p>High-risk extractions executed under fire. Precision and timing separate the winners from the rest.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -153,9 +199,9 @@
 
     <section id="info" class="panel">
       <h3 style="color:var(--accent);margin-top:0">Quick Info</h3>
-      <p class="lead">Keep it simple: join our Discord to engage with the squad. Replace each placeholder with an <code>&lt;img src=&quot;/path/to/image.jpg&quot; alt=&quot;...&quot;&gt;</code> when you have screenshots or clips.</p>
+      <p class="lead">Join our Discord to get involved: tactics, ops, recruitment, and base screenshots. Click the button below or copy the invite.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px">
-        <a class="btn" href="https://discord.gg/yourclanlink" target="_blank" rel="noopener noreferrer">Join Discord</a>
+        <a class="btn" href="https://discord.gg/xdwkgaNGba" target="_blank" rel="noopener noreferrer">Join Discord</a>
         <button class="btn ghost" id="copyLink">Copy Discord Link</button>
       </div>
     </section>
@@ -164,6 +210,7 @@
   <footer>© <span id="year"></span> DIH Clan. Built for the raid.</footer>
 
   <script>
+    // set year
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // typed subtitle
@@ -210,7 +257,7 @@
 
     // copy discord link
     (function copyLink(){
-      const btn = document.getElementById('copyLink'), url = 'https://discord.gg/yourclanlink';
+      const btn = document.getElementById('copyLink'), url = 'https://discord.gg/xdwkgaNGba';
       btn.addEventListener('click', async ()=>{
         try{ await navigator.clipboard.writeText(url); btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy Discord Link',1200); }
         catch{ btn.textContent='Copy Failed'; setTimeout(()=>btn.textContent='Copy Discord Link',1200); }
